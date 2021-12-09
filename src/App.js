@@ -12,7 +12,7 @@ export default () => {
 
   const [chatlist, setChatList] = useState([
     { chatId: 1, title: 'Felipe', image: 'https://www.w3schools.com/w3images/avatar2.png' },
-    { chatId: 2, title: 'Felipe', image: 'https://www.w3schools.com/w3images/avatar2.png' },
+    { chatId: 2, title: 'Bruno', image: 'https://www.w3schools.com/w3images/avatar2.png' },
     { chatId: 3, title: 'Felipe', image: 'https://www.w3schools.com/w3images/avatar2.png' },
     { chatId: 4, title: 'Felipe', image: 'https://www.w3schools.com/w3images/avatar2.png' }
   ]);
