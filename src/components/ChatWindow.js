@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect, useRef} from "react";
 import EmojiPicker from "emoji-picker-react";
 import './ChatWindow.css';
 import MessageItem from "./MessageItem";
@@ -13,6 +13,8 @@ import MicIcon from '@material-ui/icons/Mic';
 
 export default ({user}) => {
 
+    const body = useRef();
+
     let recognition = null;
     let SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition || window.mozSpeechRecognition
     if (SpeechRecognition !== undefined) {
@@ -25,7 +27,27 @@ export default ({user}) => {
     const [list, setList] = useState([
         {author: 123, body: 'bla bla bla bla'},
         {author: 123, body: 'bla bla bla'},
-        {author: 1234, body: 'bla bla'}]);
+        {author: 1234, body: 'bla bla'},
+        {author: 123, body: 'bla bla bla bla'},
+        {author: 123, body: 'bla bla bla'},
+        {author: 1234, body: 'bla bla'},
+        {author: 123, body: 'bla bla bla bla'},
+        {author: 123, body: 'bla bla bla'},
+        {author: 1234, body: 'bla bla'},
+        {author: 123, body: 'bla bla bla bla'},
+        {author: 123, body: 'bla bla bla'},
+        {author: 1234, body: 'bla bla'},
+        {author: 1234, body: 'bla bla'},
+        {author: 123, body: 'bla bla bla bla'},
+        {author: 123, body: 'bla bla bla'},
+        {author: 1234, body: 'bla bla'},
+    ]);
+
+    useEffect(() => {
+        if(body.current.scrollHeight > body.current.offsetHeight) { //Se tamanho do Scroll for maior que o tamanho da tela
+            body.current.scrollTop = body.current.scrollHeight - body.current.offsetHeight; // Coloca no scrollTop o tamanho do scroll menos tamanho da tela
+        }
+    }, [list])
 
     const handleEmojiClick = (e, emojiObject) => {
         setText(text + emojiObject.emoji);
@@ -75,7 +97,7 @@ export default ({user}) => {
                 </div>
 
             </div>
-            <div className="chatWindow--body">
+            <div ref={body} className="chatWindow--body">
                 {list.map((item, key) => (
                     <MessageItem
                         key={key}
