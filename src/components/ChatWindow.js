@@ -11,9 +11,16 @@ import SendIcon from '@material-ui/icons/Send';
 import MicIcon from '@material-ui/icons/Mic';
 
 export default () => {
-    
+
+    let recognition = null;
+    let SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition || window.mozSpeechRecognition
+    if (SpeechRecognition !== undefined) {
+        recognition = new SpeechRecognition();
+    }
+
     const [emojiOpen, setEmojiOpen] = useState(false);
     const [text, setText] = useState('');
+    const [listening, setListening] = useState(false);
 
     const handleEmojiClick = (e, emojiObject) => {
         setText(text + emojiObject.emoji);
@@ -23,6 +30,23 @@ export default () => {
     }
     const handleCloseEmoji = () => {
         setEmojiOpen(false);
+    }
+
+    const handleSendClick = () => {}
+    const handleMicClick = () => {
+        if(recognition !== null) {
+            recognition.onstart = () => {
+                setListening(true);
+            }
+            recognition.onend = () => {
+                setListening(false);
+            }
+            recognition.onresult = (event) => {
+                setText(event.results[0][0].transcript);
+            }
+
+            recognition.start();
+        }
     }
 
     return (
@@ -86,12 +110,12 @@ export default () => {
                 </div>
                 <div className="chatWindow--pos">
                     {text === '' &&
-                        <div className="chatWindow--btn">
-                            <MicIcon style={{ color: '#919191' }}/>
+                        <div className="chatWindow--btn" onClick={handleMicClick}>
+                            <MicIcon style={{ color: listening ? '#126ece' : '#919191' }}/>
                         </div>
                     }
                     {text !== '' &&
-                        <div className="chatWindow--btn">
+                        <div className="chatWindow--btn" onClick={handleSendClick}>
                             <SendIcon style={{ color: '#919191' }}/>
                         </div>
                     }
