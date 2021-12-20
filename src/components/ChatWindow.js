@@ -41,7 +41,8 @@ export default () => {
                         <AttachFileIcon style={{ color: '#919191' }}/>
                     </div>
                     <div className="chatWindow--btn">
-                        <MoreVertIcon style={{ color: '#919191' }}/>                    </div>
+                        <MoreVertIcon style={{ color: '#919191' }}/>
+                    </div>
                 </div>
 
             </div>
@@ -84,9 +85,16 @@ export default () => {
                     />
                 </div>
                 <div className="chatWindow--pos">
-                    <div className="chatWindow--btn">
-                        <SendIcon style={{ color: '#919191' }}/>
-                    </div>
+                    {text === '' &&
+                        <div className="chatWindow--btn">
+                            <MicIcon style={{ color: '#919191' }}/>
+                        </div>
+                    }
+                    {text !== '' &&
+                        <div className="chatWindow--btn">
+                            <SendIcon style={{ color: '#919191' }}/>
+                        </div>
+                    }
                 </div>
             </div>
         </div>
