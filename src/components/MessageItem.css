@@ -1,0 +1,26 @@
+.MessageLine {
+    margin-bottom: 10px;
+    display: flex;
+    
+}
+.MessageItem {
+    background-color: #FFF;
+    border-radius: 10px;
+    box-shadow: 0 1px 1px #CCC;
+    display: flex;
+    flex-direction: column;
+    padding: 3px;
+    max-width: 90%;
+}
+.MessageItem--text {
+    font-size: 14px;
+    margin: 5px 40px 5px 5px;
+}
+.MessageItem--date {
+    font-size: 11px;
+    color: #999;
+    margin-right: 5px;
+    margin-top: -15px;
+    height: 15px;
+    text-align: right;
+}
