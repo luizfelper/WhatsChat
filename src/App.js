@@ -4,6 +4,7 @@ import ChatListItem from './components/ChatListItem';
 import ChatIntro from './components/ChatIntro';
 import ChatWindow from './components/ChatWindow';
 import NewChat from './components/NewChat';
+import Login from './components/Login';
 
 import DonutLargeIcon from '@material-ui/icons/DonutLarge';
 import ChatIcon from '@material-ui/icons/Chat';
@@ -19,9 +20,23 @@ export default () => {
     { chatId: 4, title: 'Felipe', image: 'https://www.w3schools.com/w3images/avatar2.png' }
   ]);
   const [activeChat, setActiveChat] = useState({});
-  const [user, setUser] = useState(
-    {id: 1234, avatar: 'https://www.w3schools.com/w3images/avatar2.png', name: 'Luiz Felipe'});
-    const [showNewChat, setShowNewChat] = useState(false);
+  const [user, setUser] = useState(null);
+  
+  const [showNewChat, setShowNewChat] = useState(false);
+  
+  const handleLoginData = async (u) => {
+    let newUser = {
+      id: u.uid,
+      name: u.displayName,
+      avatar: u.photoURL
+    };
+    //
+    setUser(newUser);
+  }
+
+  if(user === null){
+    return (<Login onReceive={handleLoginData}/>)
+  }
   
   const handleNewChat = () => {
     setShowNewChat(true);
